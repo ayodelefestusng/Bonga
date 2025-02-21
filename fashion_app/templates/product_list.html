@@ -1,0 +1,13 @@
+<h1> Products</h1>
+{% for i in products %}
+    <h4>{{i.name}}</h4>
+    <h6>{{i.price}}</h6>
+    <h6>{{i.category}}</h6>
+    <h6>{{i.description}}</h6>
+    <h6>{{i.image}}</h6>
+    <form action="" method ='POST' class ='mt-1 col-4' >
+        {% csrf_token %}
+        <input type="hidden" name="product" value="{{i.id}}">
+        <button class="btn btn-outline-success" type="submit">Submit</button>
+    </form>
+{% endfor %}
