@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  <title> {{Title}} </title>
+{% endblock title %}
+
+
+
+{% block content %}
+<div class="container">
+
+        <div>
+
+       <br>
+       <br>
+
+       <form method ='POST' class ='mt-5 col-4' >
+                {% csrf_token %}
+                {{ form|crispy}}
+                <button type="submit" class="btn btn-primary">Redeem Code</button>
+            </form>
+
+
+
+            {% if id %}
+                <p>ID: {{ id }}</p>
+            {% else %}
+                <p>{{ error }}</p>
+            {% endif %}
+
+
+            {% for i in Alex1 %}
+            {{i.gift}}
+            yam tubjdjdjdj
+            {% endfor %}
+
+
+        </div>
+
+                        
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+

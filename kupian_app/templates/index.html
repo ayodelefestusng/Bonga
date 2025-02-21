@@ -1,0 +1,34 @@
+{% if latest_question_list %}
+    <ul>
+    {% for i in latest_question_list %}
+        <li><a href="/todolist/{{ i.gift }}/">{{ i.gift }}</a></li>
+        
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+                        
+{% for i in messages %}
+<div class="alert alert-info" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  
+  {{ i  }}
+</div>
+
+{% endfor %}
+
+
+
+    <form action="{% url 'todolist'%}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            
+            <input type="text" name="code" id="code" placeholder="The code">
+            <input type="text" name="gift" id="gift" placeholder="The gift">
+                
+        </fieldset>
+        <input type="submit" value="Create Gift">
+        </form>

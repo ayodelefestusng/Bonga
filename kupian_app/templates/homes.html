@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static  %}
+
+{% block title %}
+<title> {{Title}} </title>
+{% endblock title %}
+
+
+
+{% block content %}
+<style>
+    .mycontainer {
+      display: flex;
+    }
+    .mycontainer > div {
+      width:33%;
+    }
+    </style>
+
+  
+
+    <!-- <div class="container">
+        <div class="row mt-3 mx-md-n5">
+            
+            <div class="col-lg-4 mr-5 ">
+                <img src="{% static 'images/digital.png' %}"alt ="TaskMate" width="500" height="300" display= 'inline-block'>
+                <div>
+                    <h4>Digitals</h4>
+                  </div>
+              </div>
+              <div class="col-lg-4 mr-5 ">
+                <img src="{% static 'images/innovation.png' %}"alt ="TaskMate" width="500" height="300">
+                <div>
+                    <h4>Innovation</h4>
+                  </div>
+                
+              </div>
+              <div class="col-lg-4 mr-5 ">
+                <img src="{% static 'images/solar.jpg' %}"alt ="TaskMate" width="500" height="300">
+                <div>
+                    <h4>Renewable Energy</h4>
+                  </div>
+                
+              </div>
+
+        </div>
+        <div class="row mt-5">
+            <h1>Iyani To {{Naija}}</h1>
+            <div>
+                ththrh
+              </div>
+        </div>
+          
+       
+      </div>
+ -->
+
+<br>
+<br>
+<div class="container">
+        <div class="row mx-md-n3"   >
+            <div class="col px-md-3">
+                <img src="{% static 'images/digital2.png' %}"alt ="TaskMate" width="340" height="250"  class="rounded shadow-sm" >
+                <div>
+                    <h3>Digitals</h3>
+                </div>
+            </div>
+            <div class="col px-md-3">
+                <img src="{% static 'images/innovation2.png' %}"alt ="TaskMate" width="340" height="250" class="rounded shadow-sm" >
+                <div>
+                    <h3>Innovation</h3>
+                </div>
+            </div>
+            <div class="col px-md-3">
+                <img src="{% static 'images/solar2.jpg' %}"alt ="TaskMate" width="340" height="250" class="rounded shadow-sm" >
+                <div>
+                    <h3>Renewable Energy</h3>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row mt-5"> 
+            <div class="col-md-10 offset-md-1">
+                <center><p class="h1 "style="color: #000066" > We are a global leading Digital Solution Provider Yemi </p></center>
+                <center><p class="h2 mt-2 "style="color: #000080" > Our focus is value driven</p></center>
+                <center>  <a href="{% url 'redeem'  %}"><button type="button" class="btn btn-primary btn-lg mt-3 shadow ">Let's get Started </button> </a></center>
+            </div>
+        
+        </div>
+</div>
+
+<div class ='container'>
+    <h1>Welcome To {{Naija}}</h1>
+dkdkkddkdk
+
+\Ajibike
+
+
+
+{% endblock content %}

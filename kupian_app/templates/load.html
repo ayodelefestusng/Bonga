@@ -1,0 +1,116 @@
+
+{% extends "base.html" %}
+{% load static  %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+                        
+  {% for i in messages %}
+  <div class="alert alert-info" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    
+    {{ i  }}
+  </div>
+
+  {% endfor %}
+
+
+  <div class="container mt-5"> 
+    <h3>Create Promo Vouchers</h3>
+    <div class="col-4">
+    <form class="form-inline" action="{% url 'load'%}" method="post">
+      {% csrf_token %}
+     
+        <input type="text" name="code" id="code"class="form-control" placeholder="The code">
+        
+          <input type="text" name="gift" id="gift" class="form-control"placeholder="Code Point">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+
+  <div class="container mt-5"> 
+    <h3>Create Gift Items Here</h3>
+    <div class="col-4">
+    <form class="form-inline" action="{% url 'create_gift'%}" method="post">
+      {% csrf_token %}
+          <input type="text" name="gift_name" id="gift" class="form-control"placeholder="Gift Name">
+          <input type="number" name="value" id="value" class="form-control"placeholder="value">
+          <input type="number" name="QuantityProduced" id="QuantityProduced" class="form-control"placeholder="QuantityProduced">
+          <input type="file" name="gift_picture" id="gift_picture"class="form-control" placeholder="gift_picture">  
+        </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+
+
+
+    <div class="container mt-5"> 
+      <h3>Map Winning Codes/h3>
+      <div class="col-4">
+      <form class="form-inline" action="{% url 'winnings'%}" method="post">
+        {% csrf_token %}
+            <input type="text" name="items_name" id="gift" class="form-control"placeholder="items_name">
+            <input type="text" name="Voucher_id" id="Voucher_id" class="form-control"placeholder="Voucher_id">
+
+          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+
+
+
+
+       <div class="container mt-5"> 
+        <h3>Map Winning Codes</h3>
+        <div class="col-4">
+        <form class="form-inline" action="{% url 'winnings'%}" method="post">
+          {% csrf_token %}
+          {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+          <select name="items_name" class="i-can-add-my-own-attrs-now" id="items_name">
+            {% for i in ajero %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+          </select> 
+
+          <br>
+          <br>
+          <select name="value" class="i-can-add-my-own-attrs-now" id="value">
+            {% for i in ajeroT %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+          </select>
+            
+            </div>
+              <button type="submit" class="btn btn-outline-success">Submit</button>
+          </form>
+        </div>   
+       
+{% for i in ajero %}
+{{i.id}}
+{% endfor %}
+<br>
+
+<select name="items_name" class="i-can-add-my-own-attrs-now" id="items_name">
+  {% for i in ajero %}
+  <option value="{{ id }}">{{ i.id }}</option>
+  {% endfor %}
+</select> 
+
+<select class="form-select form-select-sm" aria-label="Small select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select> 
+
+
+  {% endblock content %}

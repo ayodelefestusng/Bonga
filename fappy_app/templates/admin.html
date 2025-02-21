@@ -1,0 +1,118 @@
+
+
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% block title %}
+  <title> {{Title}} </title>
+{% endblock title %}
+
+
+
+{% block content %}
+
+{% for i in messages %}
+  <div class="alert alert-info" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    
+    {{ i  }}
+  </div>
+
+  {% endfor %}
+<br>
+
+  <div class="container">
+    <div class="row">
+          <div class="col-5">
+            
+      <h6>Create Invoice</h6>
+      <form action="{% url 'invoice' %}" method ='POST' class ='mt-1 col-4' >
+        {% csrf_token %}
+      {{invoice|crispy}}
+
+        <button class="btn btn-primary mb-5" type="submit" >Load</button>
+      </form>
+
+      <h6>Create Customer</h6>
+      <form action="{% url 'customer' %}" method ='POST' class ='mt-1 col-4' >
+        {% csrf_token %}
+      {{customer|crispy}}
+
+        <button class="btn btn-primary mb-5" type="submit" >Load</button>
+      </form>
+
+      <h6>Create Model</h6>
+      <form action="{% url 'model' %}" method ='POST' class ='mt-1 col-4' >
+        {% csrf_token %}
+      {{model|crispy}}
+
+        <button class="btn btn-primary mb-5" type="submit" >Load</button>
+      </form>
+
+      <h6>Create Product</h6>
+      <form action="{% url 'product' %}" method ='POST' class ='mt-1 col-4' >
+        {% csrf_token %}
+      {{product|crispy}}
+
+        <button class="btn btn-primary mb-5" type="submit" >Load</button>
+      </form>
+      <h6>Create Brand</h6> 
+
+      <form action="{% url 'brand' %}" method ='POST' class ='mt-1 col-4' >
+          {% csrf_token %}
+        {{brand|crispy}}
+    
+          <button class="btn btn-primary mb-5" type="submit" >Load</button>
+        </form>
+    <h6>Create category</h6>
+        <form action="{% url 'category' %}" method ='POST' class ='mt-1 col-4' >
+          {% csrf_token %}
+        {{category|crispy}}
+    
+          <button class="btn btn-primary mb-5" type="submit" >Load</button>
+        </form>
+          </div>
+          <div class="col-2">
+            Low Produdct Indicator
+
+          </div>
+          <div class="col-5">
+            Second
+
+            <table class="table caption-top">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col"><h6>SN</h6></th>
+                  
+                  <th scope="col"><h6><center>Name</center></h6></th>
+                  <th scope="col"><h6><center>VIN</center></h6></th>
+                  <th scope="col"><h6><center>Trx Type</center></h6></th>
+                  <th scope="col"><h6><center>Date</center></h6></th>
+                </tr>
+              </thead>
+              
+                  <tbody>
+                    {% for i in transact_report  %}
+                  
+                      <tr>
+                    
+                          <th scope="row">  {{ forloop.counter }}</th>
+                       
+                          <td>  {{i.cus_Name}}</td>
+                          <td>  {{i.vin}}</td>
+                          <td>  {{i.transaction_type}}</td>
+                          <td>  {{i.created}}</td>
+                       
+                        </tr>
+
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+    </div>
+
+  </div>
+
+  
+{% endblock content %}
+                        

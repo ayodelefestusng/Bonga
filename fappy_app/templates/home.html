@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static  %}
+
+{% block title %}
+<title> {{Title}} </title>
+{% endblock title %}
+
+
+
+{% block content %}
+<style>
+    .mycontainer {
+      display: flex;
+    }
+    .mycontainer > div {
+      width:33%;
+    }
+    </style>
+
+  
+<br>
+<br>
+<div class="container">
+    <h2>Welcome To Top Power Systems </h2>
+</div>
+<div class="container">
+        <div class="row mx-md-n3"   >
+            <div class="col px-md-3">
+                <img src="{% static 'images/digital2.png' %}"alt ="TaskMate" width="340" height="250"  class="rounded shadow-sm" >
+                <div>
+                    <h3>Digitals</h3>
+                </div>
+            </div>
+            <div class="col px-md-3">
+                <img src="{% static 'images/electrical2.png' %}"alt ="Electrical" width="340" height="250" class="rounded shadow-sm" >
+                <div>
+                    <h3>Power</h3>
+                </div>
+            </div>
+            <div class="col px-md-3">
+                <img src="{% static 'images/solar2.jpg' %}"alt ="TaskMate" width="340" height="250" class="rounded shadow-sm" >
+                <div>
+                    <h3>Renewable Energy</h3>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row mt-5"> 
+            <div class="col-md-10 offset-md-1">
+                <center><p class="h1 "style="color: #000066" > We are a global leading Digital Solution Provider </p></center>
+                <center><p class="h2 mt-2 "style="color: #000080" > Our focus is value driven</p></center>
+                <center>  <a href="{% url 'dailyops'  %}"><button type="button" class="btn btn-primary btn-lg mt-3 shadow ">Let's get Started </button> </a></center>
+            </div>
+        
+        </div>
+</div>
+
+<div class ='container'>
+
+
+
+
+{% endblock content %}
