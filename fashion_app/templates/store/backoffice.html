@@ -1,0 +1,57 @@
+{% extends 'store/main.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+	
+	
+
+
+
+
+ddkddkk
+
+
+{% if  messages%}
+         
+{% for i in messages %}
+<div class="alert alert-info" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  
+  {{ i  }}
+</div>
+
+{% endfor %}
+
+{% endif %}
+<div >
+	
+	<form action="{% url 'backoffice' %}" method ='POST' class ='mt-1 col-4' >
+		{% csrf_token %}
+		{{category_form|crispy}}
+		<button class="btn btn-primary mb-5" type="submit" >Create</button>
+	</form>
+</div>
+
+
+
+<div>
+	<h5> Create Product</h5>
+	<form action="{% url 'backoffice' %}" method ='POST' class ='mt-1 col-4' >
+		{% csrf_token %}
+		{{product_form|crispy}}
+		<button class="btn btn-primary mb-5" type="submit" >Create</button>
+	</form>
+</div>
+<div>
+	<h5>  Treasury Management </h5>
+	<form action="{% url 'backoffice' %}" method ='POST' class ='mt-1 col-4' >
+		{% csrf_token %}
+		{{currency_form|crispy}}
+		<button class="btn btn-primary mb-5" type="submit" >Create</button>
+	</form>
+</div>
+
+
+
+{% endblock content %}
