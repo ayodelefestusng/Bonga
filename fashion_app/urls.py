@@ -11,6 +11,7 @@ urlpatterns = [
 	path('update_item/', views.updateItem, name="update_item"),
 	path('process_order/', views.processOrder, name="process_order"),
  	path('backoffice/', views.backoffice, name="backoffice"),
+  	path('edit_currency/', views.edit_currency, name='edit_currency'),
 	
  
 

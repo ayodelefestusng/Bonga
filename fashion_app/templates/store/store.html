@@ -1,5 +1,17 @@
 {% extends 'store/main.html' %}
 {% load static %}
+{% block currency %}
+<form id="autoSubmitForm" action="{% url 'edit_currency'%}" method="post" class ='mt-1 col-4'>
+	{% csrf_token %}
+	<select class="form-select" name="currency" id="autoSubmitSelect">
+	<option value='NGN'> Naira Flag</option>
+	<option value='USD'> USD Flag</option>
+	<option value='GBP'> Pound Flag</option>
+	<option value='EURO'> Euro Flag</option>
+	</select>
+  </form>
+  
+{% endblock currency %}
 {% block content %}
 	<div class="row d-flex justify-content-center">
 		{% for product in products %}
@@ -23,3 +35,12 @@
 	</div>
 
 {% endblock content %}
+
+{% block scrip %}
+<script>
+	document.getElementById('autoSubmitSelect').addEventListener('change', function() {
+		document.getElementById('autoSubmitForm').submit();
+	});
+  </script>
+
+{% endblock scrip %}

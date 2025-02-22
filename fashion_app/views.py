@@ -136,3 +136,13 @@ def backoffice(request):
 		currency_form = CurrencyForm()
 		context ={'category_form':category_form,'product_form':product_form,'currency_form':currency_form}
 		return render(request, 'store/backoffice.html', context)
+
+
+def edit_currency(request):
+    category_id = request.POST['currency']
+    cont= Currency.objects.get(pk=1)
+    print ('ups')
+    cont.currency=category_id
+    cont.save()
+    return redirect('store')
+  
