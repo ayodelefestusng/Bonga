@@ -18,8 +18,10 @@ class CategoryForm (forms.ModelForm):
 class ProductForm (forms.ModelForm):
     class Meta:
         model = Product
-        fields = [ 'category','name', 'price', 'digital','image']
-        labels = {'category': ' Product Category','name': 'Product Name','price': 'Product Price','digital': 'Digital','image': "Product Image",}  
+        fields = '__all__'
+    
+        # fields = [ 'category','name', 'price', 'digital','image']
+        # labels = {'category': ' Product Category','name': 'Product Name','price': 'Product Price','digital': 'Digital','image': "Product Image",}  
         
 
 class CurrencyForm (forms.ModelForm):

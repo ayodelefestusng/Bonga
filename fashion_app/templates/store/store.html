@@ -5,6 +5,7 @@
 	{% csrf_token %}
 	<select class="form-select" name="currency" id="autoSubmitSelect">
 	<option value='NGN'> Naira Flag</option>
+	<option value='NGN'> USD Flag</option>
 	<option value='USD'> USD Flag</option>
 	<option value='GBP'> Pound Flag</option>
 	<option value='EURO'> Euro Flag</option>
@@ -13,6 +14,22 @@
   
 {% endblock currency %}
 {% block content %}
+
+div>
+
+	<form id="autoSubmitForm" action="" method="post" class ='mt-1 col-4'>
+		{% csrf_token %}
+		<select class="form-select" name="your_field" id="autoSubmitSelect">
+			<option value="">Select  Product Category</option>
+		{% for i in categories %}
+		<option value={{i.id}}>{{i.category}} </option>
+	{% endfor %}
+		</select>
+	</form>
+	
+	
+	
+	</div>
 	<div class="row d-flex justify-content-center">
 		{% for product in products %}
 		<div class=" col-md-3 mx-1 mb-5 text-dark">
@@ -36,11 +53,11 @@
 
 {% endblock content %}
 
-{% block scrip %}
+{% block script %}
 <script>
 	document.getElementById('autoSubmitSelect').addEventListener('change', function() {
 		document.getElementById('autoSubmitForm').submit();
 	});
   </script>
 
-{% endblock scrip %}
+{% endblock script %}

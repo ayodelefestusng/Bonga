@@ -160,3 +160,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = "login"
 # Static files (CSS, JavaScript, Images)    
+PAYPAL_SECRET = 'EF_x_HBEblDUdkfIW7EED8KuRNnKG9yfJM34s0yJr-agkt8Q9wavpIxHop5Wd2Qx2E7dQGCKlzJ3L9Qc'
+PAYPAL_CLIENT_ID = 'ARfFJV3v4RVrfCoP2gbJ7nFpyUgeNP3lmk0_qWa-bQcl7Y8Hs2eTvbPw-EvNBHj6W6Y1pTDnlnMfkIcp'

@@ -18,14 +18,14 @@ class Category(models.Model):
 		return self.category
 
 class Product(models.Model):
-	category = models.ForeignKey('Category', verbose_name=(""), on_delete=models.CASCADE, null=True,default= "")
+	category = models.ForeignKey(Category, verbose_name=(""), on_delete=models.CASCADE, null=True,blank=True)
 	name = models.CharField(max_length=200)
-	price = models.PositiveIntegerField((""))
+	price = models.PositiveIntegerField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
 
-	def __str__(self):
-		return self.name
+	# def __str__(self):
+	# 	return self.name
 
 	@property
 	def imageURL(self):
@@ -35,9 +35,6 @@ class Product(models.Model):
 			url = ''
 		return url
 
-  
-	def __str__(self):
-		return self.name
 
 	@property
 	def get_currency_value(self, currency_code):
@@ -54,7 +51,7 @@ class Product(models.Model):
 				return currency.pound
 		except Currency.DoesNotExist:
 			return None  # Handle missing currency scenario
-		return None
+		return "aYO"
 
 	def get_price_in_currency(self, currency_code):
 		"""Convert the product price to the selected currency."""
@@ -67,13 +64,13 @@ class Product(models.Model):
 		try:
 			jab = Currency.objects.get(pk=1)
 			if jab.currency == 'NGN':
-				return self.price/jab.naira
+				return float(self.price)
 			elif jab.currency  == 'USD':
-				return self.price/jab.usd
+				return float(self.price/jab.usd)
 			elif jab.currency == 'EURO':
-				return self.price/jab.euro
+				return float(self.price/jab.euro)
 			elif jab.currency  == 'GBP':
-				return self.price/jab.pound
+				return float(self.price/jab.pound)
 		except Currency.DoesNotExist:
 			return None  # Handle missing currency scenario
 		return None
@@ -94,28 +91,40 @@ class Product(models.Model):
 			return None  # Handle missing currency scenario
 		return None
 
+
 class Order(models.Model):
-	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-	date_ordered = models.DateTimeField(auto_now_add=True)
-	complete = models.BooleanField(default=False)
-	transaction_id = models.CharField(max_length=100, null=True)
+    session_key = models.CharField(max_length=255, unique=True, default='a')
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    completed = models.BooleanField(default=False)
+   
 
-	def __str__(self):
-		return str(self.id)
-		
+class OrderItem(models.Model):
+	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+	order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
+	quantity = models.IntegerField(default=1, null=True, blank=True)
+	date_added = models.DateTimeField(auto_now_add=True)
+ 
+ 
+	# def __str__(self):
+	# 	return self.product
+
+
+
 	@property
-	def shipping(self):
-		shipping = False
-		orderitems = self.orderitem_set.all()
-		for i in orderitems:
-			if i.product.digital == False:
-				shipping = True
-		return shipping
+	def get_total(self):
+		total = self.product.price * self.quantity
+		return total
+	
+	@property
+	def get_total_product_price(self):
+		total = self.product.price * self.quantity
+		return total
 
+	
 	@property
 	def get_cart_total(self):
 		orderitems = self.orderitem_set.all()
-		total = sum([item.get_total for item in orderitems])
+		total = sum([item.get_total_price for item in orderitems])
 		return total 
 
 	@property
@@ -123,18 +132,7 @@ class Order(models.Model):
 		orderitems = self.orderitem_set.all()
 		total = sum([item.quantity for item in orderitems])
 		return total 
-
-class OrderItem(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-	quantity = models.IntegerField(default=0, null=True, blank=True)
-	date_added = models.DateTimeField(auto_now_add=True)
-
-	@property
-	def get_total(self):
-		total = self.product.price * self.quantity
-		return total
-
+    
 class ShippingAddress(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -151,11 +149,11 @@ class ShippingAddress(models.Model):
 
 class Currency(models.Model):
 	currecy_choices =[('NGN','Naira'),('GBP','Pound'),('EURO','Euro'),('USD','usd')]
-	currency  =  models.CharField((""), max_length=50 ,choices=currecy_choices, default='NGN')
-	naira = models.DecimalField((""), max_digits=5, decimal_places=2,default= 1)
-	pound =models.DecimalField((""), max_digits=5, decimal_places=2,default= 1)
-	euro =models.DecimalField((""), max_digits=5, decimal_places=2,default= 1)
-	usd = models.DecimalField((""), max_digits=5, decimal_places=2,default= 1)
+	currency  =  models.CharField( max_length=50 ,choices=currecy_choices, default='NGN')
+	naira = models.DecimalField( max_digits=10, decimal_places=2,default= 1)
+	pound =models.DecimalField( max_digits=10, decimal_places=2,default= 1)
+	euro =models.DecimalField( max_digits=10, decimal_places=2,default= 1)
+	usd = models.DecimalField( max_digits=10, decimal_places=2,default= 1)
 	
 	
 	def __str__(self):

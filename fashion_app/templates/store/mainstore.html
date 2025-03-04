@@ -1,0 +1,76 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block currency %}
+<div>
+	<form id="autoSubmitForm" action="{% url 'edit_currency'%}" method="post" class ='mt-1 col-4'>
+		{% csrf_token %}
+		<select class="form-select" name="currency" id="autoSubmitSelect">
+		<option value='NGN'> Select Currency</option>
+		<option value='NGN'> NGN Flag</option>
+		<option value='USD'> USD Flag</option>	
+		<option value='GBP'> Pound Flag</option>
+		<option value='EURO'> Euro Flag</option>
+		</select>
+	  </form>
+	 
+</div>
+<div  class ='mt-1 col-4'>
+	<select onchange="window.location.href=value" class="form-select" name="currency" id="autoSubmitSelect2">
+		<option value= ""> Select Category</option>
+		{% for i in  categories %}
+		<option value= "{% url 'store' i.id %}">{{i.category}} </option>
+		{% endfor %}
+		</select>
+</div>
+ 
+{% endblock currency %}
+
+{% block cart %}
+<p id="cart-total">{{cartTotalItems}}</p>
+{% endblock cart %}
+
+{% block content %}
+
+</div>
+	<div class="row d-flex justify-content-center">
+		{% for product in products %}
+		<div class=" col-md-3 mx-1 mb-5 text-dark">
+			<img class="thumbnail" src="{{product.imageURL}}">
+			<div class="box-element product">
+				<h6><strong>{{product.name}}</strong></h6>
+				<hr>
+
+				<div style="display: flex; gap:1em; justify-content: space-between;">
+					<div>
+						<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart"><a href="{% url 'add_to_cart' product.id %}"> Add to Cart</a>	</button>
+						<!-- <a class="btn btn-outline-success" href="#">View</a>		 -->
+
+						
+					</div>
+				
+					<h6><strong>{{product.declare_currence}}-{{product.get_revised_price|floatformat:2}}</strong></h6>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+
+	    	
+{% endblock content %}
+
+{% block script %}
+<script>
+	document.getElementById('autoSubmitSelect').addEventListener('change', function() {
+		document.getElementById('autoSubmitForm').submit();
+	});
+  </script>
+
+  <script>
+	document.getElementById('autoSubmitSelect1').addEventListener('change', function() {
+		document.getElementById('autoSubmitForm1').submit();
+	});
+  </script>
+
+    
+{% endblock script %}
